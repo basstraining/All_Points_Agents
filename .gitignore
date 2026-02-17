@@ -1,0 +1,16 @@
+# Generated database
+shared/database/allpoints.db
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.env
+
+# OS
+.DS_Store
+
+# Editor / temp
+*.swp
+*.swo
+*~

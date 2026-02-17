@@ -1,0 +1,440 @@
+# All Points Agents - Build Instructions
+
+## 🎯 Goal
+
+Build 5 AI agent demos for All Points ATL that solve real operational problems without requiring WMS integration.
+
+## ⏱️ Time Estimate
+
+- **Per Demo**: 2-4 hours with AI coding agent
+- **All 5 Demos**: 1-2 days parallel, or 1 week sequential
+- **For Next Week's Call**: Focus on Demos #1 and #2 (6-8 hours total)
+
+---
+
+## 🛠️ Method 1: Replit Multi-Tab (Easiest)
+
+### Step 1: Create 6 Replit Projects
+
+For each demo, create a new Replit:
+
+1. Go to https://replit.com
+2. Click "+ Create Repl"
+3. Choose "Python" template
+4. Name it: `AllPoints-CarrierMonitor` (or appropriate name)
+5. Import the demo folder contents
+
+### Step 2: Configure Each Replit
+
+In each Replit, create a `.clinerules` file:
+
+```
+Project: All Points [Demo Name]
+
+Build an AI agent following the specification in skill.md.
+
+Requirements:
+1. Read skill.md completely before starting
+2. Implement all MCP servers listed
+3. Create the ADK agent with exact instructions from skill.md
+4. Build tests for each scenario
+5. Create README.md with setup instructions
+
+Use Arcade.dev MCP Runtime for all OAuth and API authentication.
+Use Google ADK for agent orchestration.
+Follow the development checklist in skill.md.
+```
+
+### Step 3: Start Building
+
+In each Replit tab, tell the AI:
+
+```
+"Read skill.md and build this agent following all specifications. 
+Start with the MCP servers, then the ADK agent, then tests."
+```
+
+### Step 4: Monitor Progress
+
+- Keep all 6 tabs open in your browser
+- Check each every 30 minutes
+- When one completes, move to testing phase
+- Deploy successful demos to Arcade
+
+---
+
+## 🛠️ Method 2: Claude Code Local (More Control)
+
+### Step 1: Set Up Workspace
+
+```bash
+# Create folder structure
+mkdir all-points-agents
+cd all-points-agents
+
+# Create demo folders
+mkdir -p 01_carrier_exception_monitor/{mcp_servers,tests}
+mkdir -p 02_takt_profitability/{mcp_servers,tests}
+mkdir -p 03_rate_shopping/{mcp_servers,tests}
+mkdir -p 04_chargeback_defense/{mcp_servers,tests}
+mkdir -p 05_ltl_automation/{mcp_servers,tests}
+mkdir -p 06_front_revival/{mcp_servers,tests}
+
+# Create shared folder
+mkdir -p 00_shared/{skills,templates,utils}
+```
+
+### Step 2: Copy Skill Files
+
+Place each skill markdown file in its corresponding folder:
+
+```bash
+# From this package, copy:
+cp 01_Carrier_Exception_Monitor_Skill.md 01_carrier_exception_monitor/skill.md
+cp 02_Takt_Labor_Profitability_Skill.md 02_takt_profitability/skill.md
+cp 03_ShipStation_Rate_Shopping_Skill.md 03_rate_shopping/skill.md
+cp 04_RetailReady_Chargeback_Defense_Skill.md 04_chargeback_defense/skill.md
+cp 05_MyCarrier_LTL_Automation_Skill.md 05_ltl_automation/skill.md
+cp 06_Front_Email_Revival_Skill.md 06_front_revival/skill.md
+cp 00_AllPoints_Overview.md 00_shared/skills/
+cp 07_Cross_Cutting_Concerns_Skill.md 00_shared/skills/
+```
+
+### Step 3: Open in Claude Code
+
+Open 6 terminal windows:
+
+```bash
+# Terminal 1
+cd 01_carrier_exception_monitor
+claude-code
+
+# Terminal 2
+cd 02_takt_profitability
+claude-code
+
+# Terminal 3
+cd 03_rate_shopping
+claude-code
+
+# Terminal 4
+cd 04_chargeback_defense
+claude-code
+
+# Terminal 5
+cd 05_ltl_automation
+claude-code
+
+# Terminal 6
+cd 06_front_revival
+claude-code
+```
+
+### Step 4: Give Instructions
+
+In each Claude Code session:
+
+```
+"Build this agent following the skill.md file. Create:
+1. All MCP servers in mcp_servers/
+2. The ADK agent in agent.py
+3. Tests in tests/
+4. README.md with setup instructions
+
+Follow the development checklist in skill.md."
+```
+
+---
+
+## 🛠️ Method 3: Automated Parallel Build
+
+### Step 1: Set Up Python Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install anthropic aiohttp
+```
+
+### Step 2: Configure Build Orchestrator
+
+Edit `build_orchestrator.py` with your preferences:
+
+```python
+# Choose which demos to build
+DEMOS_TO_BUILD = [
+    "01_carrier_exception_monitor",  # Priority 1
+    "02_takt_profitability",         # Priority 2
+    "03_rate_shopping",              # Priority 3
+    # Comment out if not building:
+    # "04_chargeback_defense",
+    # "05_ltl_automation",
+    # "06_front_revival"
+]
+```
+
+### Step 3: Run Orchestrator
+
+```bash
+python build_orchestrator.py
+```
+
+This will:
+- Read each skill.md
+- Generate prompts for AI coding agent
+- Build all demos in parallel
+- Report progress and errors
+
+---
+
+## 🔑 Setting Up Arcade.dev
+
+### Step 1: Create Arcade Account
+
+1. Go to https://arcade.dev
+2. Sign up with email
+3. Verify email
+
+### Step 2: Create MCP Gateway
+
+1. In Arcade dashboard, click "Gateways"
+2. Click "+ New Gateway"
+3. Name it: "AllPoints-Demos"
+4. Enable integrations:
+   - ✅ Microsoft Graph (Outlook, OneDrive, Calendar)
+   - ✅ Custom (for ShipStation, Takt, etc.)
+
+### Step 3: Add Secrets
+
+In Arcade dashboard → Secrets:
+
+```
+SHIPSTATION_API_KEY = [get from All Points]
+UPS_API_KEY = [get from All Points]
+FEDEX_API_KEY = [get from All Points]
+TAKT_API_KEY = [get from All Points]
+MYCARRIER_API_KEY = [get from All Points]
+RETAILREADY_API_KEY = [get from All Points]
+FRONT_API_TOKEN = [get from All Points]
+```
+
+### Step 4: Configure OAuth Apps
+
+For QuickBooks Online:
+1. Go to https://developer.intuit.com
+2. Create app
+3. Get Client ID and Secret
+4. Add to Arcade gateway
+
+For Microsoft Graph:
+1. Go to https://portal.azure.com
+2. Register app
+3. Add permissions: Mail.Read, Mail.Send, Files.ReadWrite.All
+4. Add to Arcade gateway
+
+---
+
+## 🧪 Testing Each Demo
+
+### Phase 1: Unit Tests (Mock Data)
+
+```bash
+cd 01_carrier_exception_monitor
+python -m pytest tests/ -v
+```
+
+Each skill includes test scenarios with expected outputs.
+
+### Phase 2: Integration Tests (Real APIs)
+
+Create a `.env` file in each demo folder:
+
+```bash
+# .env
+ARCADE_API_KEY=your_arcade_key
+SHIPSTATION_API_KEY=test_key
+# etc...
+```
+
+Run integration tests:
+
+```bash
+python -m pytest tests/integration/ -v
+```
+
+### Phase 3: Manual Testing (Live Demo Prep)
+
+Follow the "Demo Script" section in each skill.md:
+
+1. Load test data
+2. Run agent with sample input
+3. Verify outputs match expectations
+4. Time the execution (should be <2 min)
+
+---
+
+## 📦 Deployment to Production
+
+### Step 1: Deploy MCP Servers to Arcade
+
+```bash
+cd 01_carrier_exception_monitor/mcp_servers
+arcade deploy shipstation_server.py --name "ShipStation MCP"
+arcade deploy ups_tracking_server.py --name "UPS Tracking MCP"
+```
+
+### Step 2: Deploy ADK Agent
+
+```bash
+arcade deploy agent.py --name "Carrier Exception Monitor"
+```
+
+### Step 3: Configure Triggers
+
+In Arcade dashboard:
+- Set up scheduled runs (e.g., every 30 minutes)
+- Configure webhooks for real-time events
+- Set up email monitoring
+
+### Step 4: Test in Production
+
+Use Arcade's test mode:
+- Send test email
+- Verify agent responds correctly
+- Check Power BI dashboard updates
+
+---
+
+## 📊 Demo Preparation for All Points Call
+
+### Priority Demos to Complete
+
+1. **Carrier Exception Monitor** (Must Have)
+   - Most impressive visually
+   - Clear ROI (time savings)
+   - Easy to demonstrate live
+
+2. **Takt Profitability Analyzer** (Must Have)
+   - Answers Michael's exact question
+   - Shows cross-system integration
+   - High-value insights
+
+3. **Rate Shopping Optimizer** (Nice to Have)
+   - Clear cost savings ($$$)
+   - Simple to understand
+   - Quick to build
+
+### Demo Flow (5 min per demo)
+
+For each demo, follow this script:
+
+**Minute 1**: Show the problem
+- Open the system (ShipStation, Takt, etc.)
+- Show the manual process
+- "This takes 2-3 hours per day per AE"
+
+**Minutes 2-3**: Run the agent
+- Execute the agent with real data
+- Show API calls in real-time
+- Display thinking/reasoning
+
+**Minute 4**: Show the output
+- Drafted email / report / dashboard
+- Highlight key insights
+- "This would have taken 2 hours manually"
+
+**Minute 5**: ROI calculation
+- Time saved × cost per hour
+- Annual savings projection
+- Additional benefits (accuracy, proactivity)
+
+### Demo Environment Setup
+
+1. **Laptop/Screen Share Ready**
+   - Test Zoom/Teams screen sharing
+   - Close unnecessary tabs
+   - Have demo data loaded
+
+2. **Backup Plan**
+   - Pre-record demo videos (in case of live issues)
+   - Have screenshots ready
+   - Prepare to walk through code if needed
+
+3. **Q&A Prep**
+   - Review Oliver's technical questions from transcript
+   - Prepare answers on: OAuth, local models, data sovereignty
+   - Have architecture diagrams ready
+
+---
+
+## 🐛 Troubleshooting
+
+### "Arcade API authentication failed"
+
+**Solution**: Check that your Arcade API key is correct:
+
+```bash
+arcade whoami  # Should show your account
+```
+
+### "Rate limit exceeded" on carrier APIs
+
+**Solution**: Implement caching (see Cross-Cutting Concerns skill):
+
+```python
+@lru_cache(maxsize=1000)
+def get_tracking(tracking_num: str):
+    # Cache results for 30 minutes
+```
+
+### "LLM extracted invalid tracking number"
+
+**Solution**: Add validation before API calls:
+
+```python
+if not validate_tracking_format(tracking_num, carrier):
+    return "Could you provide the tracking number again?"
+```
+
+### "Power BI dataset update failed"
+
+**Solution**: Check Power BI workspace permissions and dataset schema.
+
+### "OAuth token expired"
+
+**Solution**: Arcade handles token refresh automatically. If issues persist, re-authorize in Arcade dashboard.
+
+---
+
+## 📈 Success Metrics
+
+Track these for each demo:
+
+- ✅ All unit tests passing
+- ✅ Integration tests with real APIs passing
+- ✅ Demo runs in <2 minutes
+- ✅ Outputs match expected format
+- ✅ All Points team can understand/use it
+- ✅ ROI calculation validated
+
+---
+
+## 📞 Support During Build
+
+If you get stuck:
+
+1. **Check the skill.md**: Most answers are there
+2. **Review Cross-Cutting Concerns**: Common patterns and pitfalls
+3. **Test with mock data first**: Before connecting real APIs
+4. **Build incrementally**: MCP servers → Agent → Tests
+5. **Use the checklists**: Each skill has a development checklist
+
+---
+
+## 🎉 You're Ready to Build!
+
+Choose your method (I recommend Method 1 - Replit for speed), set up your environment, and start building. 
+
+Focus on Demos #1 and #2 first for the follow-up call next week.
+
+Good luck! 🚀

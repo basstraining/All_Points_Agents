@@ -1,0 +1,244 @@
+# All Points ATL - AI Agent Demo Package
+
+## 📦 Package Contents
+
+This package contains everything needed to build 5 AI agent demos for All Points ATL using Arcade.dev's MCP Runtime and Google ADK.
+
+```
+all-points-agents/
+├── README.md                          (this file)
+├── BUILD_INSTRUCTIONS.md              (how to build all demos)
+├── build_orchestrator.py              (parallel build script)
+├── 00_shared/
+│   ├── skills/
+│   │   ├── 00_AllPoints_Overview.md
+│   │   └── 07_Cross_Cutting_Concerns_Skill.md
+│   └── templates/
+│       └── email_templates.md
+├── 01_carrier_exception_monitor/
+│   ├── skill.md
+│   ├── README.md
+│   └── .clinerules                    (for AI coding agents)
+├── 02_takt_profitability/
+│   ├── skill.md
+│   ├── README.md
+│   └── .clinerules
+├── 03_rate_shopping/
+│   ├── skill.md
+│   ├── README.md
+│   └── .clinerules
+├── 04_chargeback_defense/
+│   ├── skill.md
+│   ├── README.md
+│   └── .clinerules
+├── 05_ltl_automation/
+│   ├── skill.md
+│   ├── README.md
+│   └── .clinerules
+└── 06_front_revival/
+    ├── skill.md
+    ├── README.md
+    └── .clinerules
+```
+
+---
+
+## 🚀 Quick Start (3 Options)
+
+### **Option 1: Replit (Easiest - Recommended)**
+
+1. Go to https://replit.com
+2. Click "Create Repl" → Import from GitHub
+3. Upload this entire folder
+4. Open 6 browser tabs, one for each demo folder
+5. In each tab, tell the AI: "Build the agent following skill.md"
+
+### **Option 2: Claude Code (Local Development)**
+
+```bash
+# Open 6 terminal windows
+cd 01_carrier_exception_monitor && claude-code
+cd 02_takt_profitability && claude-code
+cd 03_rate_shopping && claude-code
+cd 04_chargeback_defense && claude-code
+cd 05_ltl_automation && claude-code
+cd 06_front_revival && claude-code
+```
+
+In each Claude Code session, say: "Build this agent following skill.md"
+
+### **Option 3: Automated Parallel Build**
+
+```bash
+python build_orchestrator.py
+```
+
+This runs all 6 builds in parallel automatically.
+
+---
+
+## 📋 Demo Overview
+
+### 1. **Carrier Exception Monitor** 
+- **Pain Point**: AEs manually check tracking for 1000+ shipments daily
+- **Solution**: Auto-detect delays, draft customer emails, alert AEs
+- **ROI**: Save 12.5 hours/day across team
+- **Systems**: ShipStation, UPS/FedEx APIs, Outlook, Power BI
+
+### 2. **Takt Labor Profitability Analyzer**
+- **Pain Point**: "Which clients are profitable? Where are we bleeding money?"
+- **Solution**: Combine Takt labor data + QB revenue → profitability reports
+- **ROI**: Identify $60K/year in repricing opportunities
+- **Systems**: Takt LMS, QuickBooks Online, Excel, Power BI
+
+### 3. **ShipStation Rate Shopping Optimizer**
+- **Pain Point**: Manual rate shopping between UPS accounts on every order
+- **Solution**: Auto-compare rates, select cheapest, generate label
+- **ROI**: $130K/year in shipping cost savings
+- **Systems**: ShipStation (2 accounts), Power BI
+
+### 4. **RetailReady Chargeback Defender**
+- **Pain Point**: $10-50K/month in retail compliance chargebacks
+- **Solution**: Auto-compile evidence, draft dispute letters, track resolution
+- **ROI**: $35K/year additional chargebacks won
+- **Systems**: RetailReady, Outlook, OneDrive, QuickBooks
+
+### 5. **MyCarrier LTL Automation**
+- **Pain Point**: 15-20 min per freight quote (3-5 daily)
+- **Solution**: Auto-quote from 5+ carriers, email customer, auto-book
+- **ROI**: $15K time savings + $30K margin improvement
+- **Systems**: MyCarrier TMS, Outlook, QuickBooks
+
+### 6. **Front Email Revival** (Bonus)
+- **Pain Point**: Failed Front implementation, AEs back on Outlook
+- **Solution**: Auto-triage emails, 40% auto-respond, organized AE queues
+- **ROI**: Justify $2,400 Front investment + save 4 hrs/day
+- **Systems**: Front, ShipStation, Outlook, Power BI
+
+---
+
+## 📚 What's in Each Skill File?
+
+Each `skill.md` contains:
+- ✅ **Objective**: What problem it solves
+- ✅ **Systems Integration**: Which APIs to connect
+- ✅ **Data Models**: Python dataclasses to implement
+- ✅ **Arcade MCP Tools**: Custom MCP servers to build
+- ✅ **ADK Agent Code**: Google ADK implementation
+- ✅ **Email Templates**: Customer-facing messages
+- ✅ **Dashboard Specs**: Power BI visualizations
+- ✅ **Testing Scenarios**: How to validate it works
+- ✅ **ROI Calculations**: Financial impact
+- ✅ **Development Checklist**: Step-by-step build plan
+- ✅ **Demo Script**: 5-minute live demo flow
+
+---
+
+## 🔧 Prerequisites
+
+### Arcade.dev Setup
+1. Sign up at https://arcade.dev
+2. Create MCP Gateway
+3. Enable integrations:
+   - Microsoft Graph (Outlook, OneDrive, Calendar)
+   - QuickBooks Online
+   - (Custom MCP servers for ShipStation, Takt, etc. - we'll build these)
+
+### All Points Credentials Needed
+- ShipStation API key
+- UPS/FedEx tracking API keys
+- Takt LMS API key
+- QuickBooks Online OAuth
+- MyCarrier TMS API key
+- RetailReady API key
+- Front API token (if reviving)
+- Power BI workspace
+
+---
+
+## 📖 Detailed Build Instructions
+
+See `BUILD_INSTRUCTIONS.md` for:
+- Step-by-step setup for each demo
+- How to test with All Points' real data
+- Deployment to production
+- Troubleshooting common issues
+
+---
+
+## 🎯 Next Steps
+
+1. **Review**: Read through the skills in order (start with `00_shared/skills/00_AllPoints_Overview.md`)
+2. **Choose Strategy**: Pick Option 1, 2, or 3 above
+3. **Build**: Start with Demo 1 (Carrier Monitor) - it's the flashiest for the call
+4. **Test**: Use the test scenarios in each skill.md
+5. **Demo**: Follow the 5-minute demo scripts for the All Points follow-up call
+
+---
+
+## 📞 All Points Context
+
+- **Company**: 3PL (warehousing/fulfillment) in Atlanta
+- **Size**: ~35 front office employees
+- **Pain**: AE inbox overload, profitability blindness, manual processes
+- **Constraint**: NO WMS integration (migrating Veracore → Deposco)
+- **Stack**: Microsoft 365, QuickBooks Online, ShipStation, Takt, MyCarrier
+- **Key People**: 
+  - Michael (Sales/Ops) - wants profitability visibility
+  - Adam (IT Director) - wants to see ROI before WMS migration
+  - Oliver (IT) - technical, interested in local models
+
+---
+
+## 🎬 Demo Prep for Follow-Up Call
+
+**Priority Order for Next Week's Call:**
+1. **Carrier Exception Monitor** (flashiest - real-time tracking)
+2. **Takt Profitability** (answers Michael's exact question)
+3. **Rate Shopping** (clear $$ savings)
+4. ~~Chargeback Defense~~ (strategic but not urgent)
+5. ~~LTL Automation~~ (nice-to-have)
+6. ~~Front Revival~~ (bonus if time)
+
+**Recommended**: Build #1 and #2 fully, have #3 as code demo
+
+---
+
+## 📝 Notes
+
+- All demos are **WMS-independent** (per Adam's requirement)
+- Each demo can be deployed **independently**
+- Built for **Microsoft/Outlook** (not Google)
+- **Oliver's concerns addressed** in Cross-Cutting Concerns skill:
+  - Token persistence
+  - Local vs cloud models
+  - Data sovereignty
+  - White-glove setup
+
+---
+
+## 💡 Tips
+
+- Start with the overview: `00_shared/skills/00_AllPoints_Overview.md`
+- Each skill is **self-contained** - can be built independently
+- Use **test data** in skills before connecting real All Points APIs
+- Follow the **development checklists** in each skill
+- Reference **Cross-Cutting Concerns** for security, error handling, testing
+
+---
+
+## 🆘 Support
+
+For questions during build:
+- Each skill has a "What NOT to Expect" section
+- Common pitfalls listed in Cross-Cutting Concerns
+- Test scenarios show expected behavior
+- Demo scripts provide end-to-end validation
+
+---
+
+## ✨ You're Ready!
+
+Pick your strategy (I recommend Option 1 - Replit) and start building. Each demo takes ~2-4 hours with an AI coding agent following the skills.
+
+Good luck with the All Points follow-up call! 🚀

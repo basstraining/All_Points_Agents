@@ -1,0 +1,11 @@
+[project]
+name = "allpoints-agents"
+version = "1.0.0"
+description = "All Points ATL — 3PL Operations Intelligence MCP Servers"
+requires-python = ">=3.10"
+dependencies = [
+    "arcade-mcp-server",
+]
+
+[tool.setuptools.packages.find]
+include = ["shared*", "mcp_servers*"]

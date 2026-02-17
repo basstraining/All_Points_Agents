@@ -1,0 +1,11 @@
+# All Points Operations Intelligence — Chatbot (Replit)
+# Run from repo root so app can find claude_project_prompt.md
+
+run = "pip install -r app/requirements.txt && cd app && chainlit run main.py --host 0.0.0.0 --port ${PORT:-8080}"
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["sh", "-c", "pip install -r app/requirements.txt && cd app && chainlit run main.py --host 0.0.0.0 --port ${PORT:-8080}"]
+deploymentTarget = "cloudrun"
